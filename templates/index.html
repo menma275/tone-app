@@ -158,7 +158,7 @@
                                     <button id="calcImg" type="button" class="submit_btn btn btn-light disabled" onclick="loadingAnimation()">Calculate</button>
                                     {% if result_name %}
                                     <!-- result_nameに画像が渡ったらダウンロード可能 -->
-                                        <a href="{{ url_for('static', filename='images'+result_name)}}" download="result.jpg" class="btn btn-light">Download</a>
+                                        <a href="{{ url_for('static', filename='images/'+result_name)}}" download="result.jpg" class="btn btn-light">Download</a>
                                     {% else %}
                                     <!-- 結果が取得されるまではダウンロード不可 -->
                                         <a href="#" download="result.jpg" class="btn btn-light disabled" aria-disabled="true">Download</a>

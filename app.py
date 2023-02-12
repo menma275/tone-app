@@ -14,7 +14,7 @@ app = Flask(__name__, static_url_path="")
 bootstrap = Bootstrap(app)
 
 # 処理した画像ファイルの保存先
-IMG_DIR = "/static/images/"
+IMG_DIR = "static/images/"
 BASE_DIR = os.path.dirname(__file__)
 IMG_PATH = BASE_DIR + IMG_DIR
 
