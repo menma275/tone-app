@@ -1,0 +1,106 @@
+body {
+    color: #212529;
+    font-family: 'Noto Sans JP', sans-serif;
+    /* font-weight: 700; */
+}
+
+
+/* menu */
+.navbar-brand {
+    font-family: 'Poppins', sans-serif;
+    /* font-family: 'Noto Sans JP', sans-serif; */
+}
+
+.navbar-brand span {
+    font-weight: 600;
+    font-size: 2em;
+    color: #F5B111;
+    letter-spacing: 0.25em;
+}
+
+.lang-choise {
+    margin-right: 2.5em;
+}
+
+a {
+    color: #fff;
+    list-style: none;
+    text-decoration: none;
+    font-size: 1em;
+    margin: auto 1em;
+}
+
+.navbar-light .navbar-toggler {
+    border-color: rgba(0, 0, 0, 0);
+}
+
+.navbar-light .navbar-toggler:active {
+    border-color: rgba(0, 0, 0, 0);
+}
+
+
+/* main */
+.main {
+    margin-left: auto;
+    margin-right: auto;
+    width: min(100% - 30px, 900px);
+    margin-inline: auto;
+}
+
+.navbar {
+    box-shadow: 0px 0px 10px rgba(100, 125, 150, 0.1);
+}
+
+.kadomaru {
+    box-shadow: 0px 0px 10px rgba(100, 125, 150, 0.1);
+    border-radius: 0.75em;
+    /* border: 0.1rem solid #212529; */
+}
+
+h1 {
+    font-weight: 700;
+    font-size: 1.5em;
+    letter-spacing: 0.2em;
+}
+
+.text-index {
+    text-align: left;
+}
+
+.text {
+    display: inline-block;
+}
+
+.col-sm-12 p {
+    font-size: 1em;
+    list-style: none;
+    letter-spacing: 0.15em;
+}
+
+h2 {
+    font-weight: 700;
+    font-size: 1.25em;
+    letter-spacing: 0.1em;
+}
+
+.card-title {
+    color: #F5B111;
+}
+
+.card-img-rs {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 0.5em;
+}
+
+.gd{
+    background: linear-gradient(to bottom right, #F5B111, #ffffff);
+}
+
+.btn {
+    font-size: 0.75em;
+}
+
+.form-control {
+    font-size: 0.75em;
+}

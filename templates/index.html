@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="誰でも簡単にカラーグレーディング">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- CSS読み込み-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/css_boot/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stylesheet.css')}}">
+    <!-- ファビコン読み込み -->
+    <link rel="icon" href="{{ url_for('static', filename='img/tone-big-a.ico')}}">
+
+    <!-- Google Font -->
+    <!-- font-family: 'Poppins', sans-serif; -->
+    <!-- font-family: 'Noto Sans JP', sans-serif; -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700&family=Poppins:wght@500;600;700&display=swap">
+
+    <!-- Web icon font -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- title -->
+    <title>tone</title>
+</head>
+
+<body class="bg-light mt-5 pt-5">
+    <!-- menu -->
+    <nav class="navbar fixed-top navbar-expand-sm navbar-light bg-white shadow-0 ">
+        <div class="container-fluid">
+            <a class="navbar-brand p-md-3 ms-md-1 d-flex align-items-center" href="#">
+                <img src="{{ url_for('static', filename='img/tone-big-a.png')}}" alt=tone-logo width=35rem>
+                <span class="ms-4" style="color:#f5b111">tone</span>
+            </a>
+        </div>
+    </nav>
+    <!-- main -->
+    <div class="main">
+        <!-- what's tone -->
+        <div class="container-fluid mt-md-5">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="p-5 bg-white kadomaru">
+                        <h1 class="card-title pb-3">
+                            <img src="{{ url_for('static', filename='img/tone-big-a.png')}}" alt=tone-logo width="25" height="25">
+                            <span style="letter-spacing:0.15em">tone</span>とは
+                        </h1>
+                        <p class="m-0 p-0">
+                            あなたの写真を、好きな色味に編集できます。<br>
+                            あなたの写真と好きな色味の写真を使って、カラーグレーディングを行います。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- how to use -->
+        <div class="container-fluid mt-5">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="p-5 bg-white kadomaru">
+                        <h1 class="card-title pb-3">使い方</h1>
+                        <div class="container m-0 p-0">
+                            <div class="row m-0 p-0">
+                                <div class="col-md-2 m-0 p-0">
+                                    Reference
+                                </div>
+                                <div class="col-md-10 m-0 p-0">
+                                    こんな色にしたい!画像を選択
+                                </div>
+                            </div>
+                            <div class="row m-0 p-0 mt-3 mb-3">
+                                <div class="col-md-2 m-0 p-0">
+                                    Subject
+                                </div>
+                                <div class="col-md-10 m-0 p-0">
+                                    この画像の色を変えたい!画像を選択
+                                </div>
+                            </div>
+                            <div class="row m-0 p-0">
+                                <div class="col-md-2 m-0 p-0">
+                                    Calculate
+                                </div>
+                                <div class="col-md-10 m-0 p-0">
+                                    色編集実行!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- img in-out -->
+        <div class="container-fluid mt-5">
+            <div class="row">
+                <!-- ref_sub -->
+                <div class="col-sm-5 mb-3">
+                    <div class="p-4 bg-white kadomaru h-100">
+                        <form action="/" method="post" enctype="multipart/form-data" id="submit_img">
+                            <!-- 参考画像 -->
+                            <div class="container m-0 mb-3 p-0">
+                                <div class="row m-0 pt-2 pb-2 ps-0">
+                                    <!-- リファレンス画像セット -->
+                                    <div class="col-md-6 mt-auto">
+                                        <h2 class="card-title">Reference</h2>
+                                            <input type="file" name="image1" accept="image/png, image/jpeg" id="input_ref" class="form-control bg-light border-0" onchange="isFile()">
+                                    </div>
+                                    <!-- リファレンス画像表示 -->
+                                    <div class="col-md-6">
+                                        {% if result_name %}
+                                            <!-- result_nameに画像が渡ったら表示 -->
+                                            <img class="card-img-rs" id="img_ref" src="{{ url_for('static', filename='images/'+ref_name)}}" alt="reference">
+                                        {% else %}
+                                        <!-- 結果が取得されるまではサンプルを表示 -->
+                                            <img class="card-img-rs" id="img_ref" src="{{ url_for('static', filename='img/img_sample.png')}}" alt="reference">
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 対象画像 -->
+                            <div class="container m-0 p-0 pt-3 border-top">
+                                <div class="row m-0 p-0 pt-2 pb-2 ps-0 ">
+                                    <!-- 対象画像セット -->
+                                    <div class="col-md-6 mt-auto">
+                                        <h2 class="card-title">Subject</h2>
+                                                <input type="file" name="image2" accept="image/png, image/jpeg" id="input_sub" class="form-control bg-light border-0" onchange="isFile()">
+                                    </div>
+                                    <!-- 対象画像表示 -->
+                                    <div class="col-md-6">
+                                        {% if result_name %}
+                                            <!-- result_nameに画像が渡ったら表示 -->
+                                            <img class="card-img-rs" id="img_sub" src="{{ url_for('static', filename='images/'+sub_name)}}" alt="subject">
+                                        {% else %}
+                                            <!-- 結果が取得されるまではサンプルを表示 -->
+                                            <img class="card-img-rs" id="img_sub" src="{{ url_for('static', filename='img/img_sample.png')}}" alt="subject">
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- Result -->
+                <div class="col-sm-7 mb-3">
+                    <div class="p-4 bg-white kadomaru">
+                        <!-- <div class="p-4 bg-white kadomaru h-100"> -->
+                        <div class="container m-0 p-0">
+                            <dir class="row m-0 ps-0">
+                                <!-- 計算用ボタン -->
+                                <div class="col-md-6 mt-auto">
+                                    <h2 class="card-title">
+                                        Result<i class="fa fa-circle-o-notch fa-spin fa-fw" style="display: none"></i>
+                                    </h2>
+                                    <button id="calcImg" type="button" class="submit_btn btn btn-light disabled" onclick="loadingAnimation()">Calculate</button>
+                                    {% if result_name %}
+                                    <!-- result_nameに画像が渡ったらダウンロード可能 -->
+                                        <a href="{{ url_for('static', filename='images'+result_name)}}" download="result.jpg" class="btn btn-light">Download</a>
+                                    {% else %}
+                                    <!-- 結果が取得されるまではダウンロード不可 -->
+                                        <a href="#" download="result.jpg" class="btn btn-light disabled" aria-disabled="true">Download</a>
+                                    {% endif %}
+                                </div>
+                                <!-- 結果画像表示 -->
+                                <div class="col-md-6">
+                                    {% if result_name %}
+                                        <!-- result_nameに画像が渡ったら表示 -->
+                                        <img class="card-img-rs" src="{{ url_for('static', filename='images/'+result_name)}}" id="show_result" alt="result">
+                                    {% else %}
+                                        <!-- 結果が取得されるまではサンプルを表示 -->
+                                        <img class="card-img-rs" src="{{ url_for('static', filename='img/img_sample.png')}}" id="show_result" alt="result">
+                                    {% endif %}
+                                </div>
+                            </dir>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- javascript読み込み -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="{{ url_for('static', filename='js/js_boot/bootstrap.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/script.js')}}"></script>
+
+</body>
+
+</html>
